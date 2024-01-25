@@ -1,0 +1,2 @@
+# obfuscatelog
+simple obfuscator
