@@ -1,14 +1,3 @@
-// fn main() -> std::io::Result<()> {
-//     let mut reader = my_reader::BufReader::open("Cargo.toml")?;
-//     let mut buffer = String::new();
-//
-//     while let Some(line) = reader.read_line(&mut buffer) {
-//         println!("{}", line?.trim());
-//     }
-//
-//     Ok(())
-// }
-
 pub mod reader {
     use std::{
         fs::File,
@@ -27,7 +16,6 @@ pub mod reader {
             Ok(Self { reader })
         }
 
-        // to read large files re-use buffer for each line
         pub fn read_line<'buf>(
             &mut self,
             buffer: &'buf mut String,
@@ -41,17 +29,3 @@ pub mod reader {
         }
     }
 }
-
-
-One way to avoid the line buffering problem would be to wrap STDOUT in another, much larger buffer.
-
-// fn main() {
-//     let file = File::open("big_file.txt").unwrap();
-//     let reader = BufReader::new(file);
-//     let mut writer = BufWriter::new(std::io::stdout()):
-//
-//     for line in reader.lines() {
-//         writeln!(writer, "{}", line.unwrap());
-//     }
-//     writer.flush().unwrap();
-// }
